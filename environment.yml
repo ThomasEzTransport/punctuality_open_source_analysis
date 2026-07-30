@@ -1,0 +1,5 @@
+name: REPLACE_WITH_ENV_NAME
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

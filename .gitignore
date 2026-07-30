@@ -1,0 +1,10 @@
+# Claude Code personal overrides (not shared across the team)
+.claude/settings.local.json
+
+# Python
+__pycache__/
+*.pyc
+.env
+
+# Windows/OneDrive folder-customization artifacts — not project files
+desktop.ini

@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "grep -q '\"command\"[[:space:]]*:[[:space:]]*\"bash run_python\\.sh ' && echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"allow\",\"permissionDecisionReason\":\"project run_python.sh wrapper\"}}' || true"
+          }
+        ]
+      }
+    ]
+  }
+}
