@@ -7,6 +7,11 @@ only `.claude/CLAUDE.md`, which is for project-specific facts (environment, entr
 If you already have a `~/.claude/CLAUDE.md`, merge these sections into it rather than overwriting.
 Adjust anything you disagree with: this is a starting point, not a policy.
 
+Sections 1-5 and 7 are the ones worth keeping close to as written — they change how carefully Claude
+works, not how the output looks. **Section 6 is personal preference**: it encodes one house style
+for comments and lookups, and you should rewrite it to match your own. The one rule in it not to
+drop is the ASCII rule, which prevents a real crash rather than expressing a taste.
+
 ---
 
 ## Development Best Practices
@@ -80,7 +85,37 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ## 6. Code Style
 
+_House style — rewrite this section to match yours. Everything here is preference except the ASCII
+rule, which prevents an actual crash._
+
 - Comment all code that isn't straightforward.
+- Use one-liner code as long as the line isn't very long.
+- Do not use `.get(key, default)` for lookups into data loaded from config files, Excel tables, or
+  external inputs. A missing key means a broken input — let it raise a `KeyError`. Silently
+  defaulting a missing input to zero produces a plausible number that nobody catches. Only use
+  `.get()` with a default when absence is explicitly valid (e.g. an optional field, a known-missing
+  category).
+- Do not add guards that check whether code was called in the correct order (e.g. `hasattr`,
+  `if x is not None`). Assume the caller is responsible for calling methods in the right sequence.
 - Do not write non-ASCII characters (e.g. arrows `→`, en/em dashes `–` `—`, `×`) in code. This
   matters on Windows: `conda run` re-encodes stdout as cp1252 and crashes with `UnicodeEncodeError`
   on such characters in anything printed or logged. `run_python.sh` uses `conda run`.
+
+## 7. Document the Final State Only
+
+**Describe what the code, config, or analysis IS - never what it used to be.**
+
+Applies to comments, docstrings, CLAUDE.md files, settings files, and analysis write-ups:
+- No "previously X, now Y", no "this used to use X", no "X was tried and did not work".
+- No dated changelogs, no "tested on <date>", no pointers to earlier commits or sessions.
+- Do not justify a choice by listing the alternatives you rejected.
+
+If a constraint is non-obvious, state the constraint, not its history:
+- Bad: "Do not use an allow rule here - that was tried in commit abc123 and failed."
+- Good: "Permission for this comes from the PreToolUse hook."
+
+Exception: a still-live trap (an upstream bug, a platform quirk the code works around) is current
+behaviour, not history. Keep it, and keep it short.
+
+Same in chat: report the final state and whether it is verified. Do not narrate the sequence of
+attempts unless I ask how you got there.

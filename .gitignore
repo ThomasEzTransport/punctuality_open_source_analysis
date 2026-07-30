@@ -6,5 +6,8 @@ __pycache__/
 *.pyc
 .env
 
+# Throwaway inspection scripts (see .claude/CLAUDE.md)
+_tmp_*.py
+
 # Windows/OneDrive folder-customization artifacts — not project files
 desktop.ini

@@ -50,7 +50,14 @@ conda env create -f environment.yml
 
 ### 3. Fill in `.claude/CLAUDE.md`
 
-Replace `REPLACE_WITH_ENV_NAME` with your conda environment name (same as above), then fill in the entry point script name and any project-specific instructions for Claude.
+Replace `REPLACE_WITH_ENV_NAME` with your conda environment name (same as above), then work through
+the italic placeholders: the project statement at the top, entry points, repository layout, how to
+verify a change, and conventions.
+
+The two most valuable to get right are the **project statement** (so Claude doesn't have to infer
+what the repo is for) and **how to verify a change** (so it can tell whether its own edit worked —
+name the real check, e.g. an output sheet or a reconciliation total, especially if there are no
+tests).
 
 Keep this file to things that are true of *this project* and would be true for any teammate working
 on it. General coding conventions belong in your personal `~/.claude/CLAUDE.md` — see the
