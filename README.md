@@ -4,17 +4,41 @@ Copy this template into any new project to give Claude Code scoped permissions w
 
 ## What's included
 
+Claude Code reads instructions from two places, and this template keeps them apart:
+
+| Where | Scope | File |
+| --- | --- | --- |
+| `~/.claude/CLAUDE.md` | You, in every project | `setup/global-CLAUDE.md` |
+| `<project>/.claude/CLAUDE.md` | This project, everyone | `.claude/CLAUDE.md` |
+
+**Copied into each new project:**
+
 - `.claude/settings.json` — pre-authorizes file read/edit/write restricted to the project directory, plus a hook that authorizes script execution via `run_python.sh`
-- `.claude/CLAUDE.md` — Claude's instructions for the project (virtual environment, entry points, notes)
+- `.claude/CLAUDE.md` — project facts only: virtual environment, entry points, notes
 - `run_python.sh` — conda wrapper that activates the environment and runs a Python script
 - `environment.yml` — conda environment definition, so the env itself is reproducible
 - `.gitignore` — excludes personal Claude settings, Python cache files, and OneDrive/Windows artifacts
 - `.gitattributes` — keeps `*.sh` on LF endings, so `run_python.sh` still works after a clone on Windows
 - `.vscode/extensions.json` — recommends the Claude Code VSCode extension on folder open
 
+**Set up once per machine, never copied into a project:**
+
+- `setup/global-CLAUDE.md` — recommended coding conventions for your own `~/.claude/CLAUDE.md`
+
+## Setup (once per machine)
+
+Copy `setup/global-CLAUDE.md` to `~/.claude/CLAUDE.md` (Windows: `C:\Users\<you>\.claude\CLAUDE.md`),
+then edit it to taste — it is a starting point, not a policy. If you already have a
+`~/.claude/CLAUDE.md`, merge the sections in instead of overwriting.
+
+Keeping these conventions in your personal file means they apply to every project you open, and you
+maintain them in one place rather than in a copy per repo.
+
 ## Setup (per new project)
 
 ### 1. Copy the template files into the project root
+
+Everything except the `setup/` folder.
 
 ### 2. Fill in `run_python.sh` and `environment.yml`
 
@@ -28,9 +52,11 @@ conda env create -f environment.yml
 
 Replace `REPLACE_WITH_ENV_NAME` with your conda environment name (same as above), then fill in the entry point script name and any project-specific instructions for Claude.
 
-> **Tip:** once the project has actual code in it, run `/init` in Claude Code to have it scan the codebase and fill in (or expand on) the entry points and notes sections automatically, instead of writing them by hand.
+Keep this file to things that are true of *this project* and would be true for any teammate working
+on it. General coding conventions belong in your personal `~/.claude/CLAUDE.md` — see the
+once-per-machine setup above.
 
-Review the 'Development Best Practices' part and amend if needed. 
+> **Tip:** once the project has actual code in it, run `/init` in Claude Code to have it scan the codebase and fill in (or expand on) the entry points and notes sections automatically, instead of writing them by hand.
 
 ## Opening the project in VSCode so Claude Code loads the right settings
 
