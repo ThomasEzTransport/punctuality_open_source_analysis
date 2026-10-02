@@ -10,3 +10,7 @@ As it stands (October 2026) the codes target two sources
 **- Open ritardi**
   Open source initiative in Italy
   https://www.openritardi.org/en/statistics.html  /  https://trainstats.altervista.org/
+
+
+The raw dataset are stored in the google drive repository
+https://drive.google.com/drive/folders/1A9ZRchVYW2egtOszCSS1_y8L7ncHAjLs
