@@ -1,5 +1,11 @@
-name: REPLACE_WITH_ENV_NAME
+name: panda_env
 channels:
   - conda-forge
 dependencies:
-  - python=3.12
+  - python=3.11
+  - pandas
+  - numpy
+  - ipykernel
+  - pip
+  - pip:
+    - openpyxl

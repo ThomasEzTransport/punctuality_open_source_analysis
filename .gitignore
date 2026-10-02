@@ -11,3 +11,6 @@ _tmp_*.py
 
 # Windows/OneDrive folder-customization artifacts — not project files
 desktop.ini
+
+# Generated report output
+output/
